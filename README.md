@@ -93,12 +93,30 @@ string connectionString = "Data Source=YOUR_SERVER_NAME;Initial Catalog=Technolo
 
 Replace `YOUR_SERVER_NAME` with the name of your SQL Server instance.
 
+### How to Obtain the Connection String Path in SSMS
+
+1. Open SQL Server Management Studio (SSMS).
+2. Connect to your SQL Server instance.
+3. In the Object Explorer, right-click on your server name.
+4. Select "Properties".
+5. In the "Server Properties" window, look for the "Connection String" in the "General" section.
+
+Alternatively, you can use the "Connect" dialog in SSMS to find the connection string:
+1. In SSMS, go to "File" > "Connect Object Explorer".
+2. Fill in the "Server name" with your SQL Server instance name.
+3. Choose the authentication method and provide the necessary credentials.
+4. Click "Connect".
+5. The "Server name" field in this dialog represents the `Data Source` part of your connection string.
+
+For detailed instructions, refer to the official guide from Microsoft: [Connect and query SQL Server using SSMS - Microsoft Learn](https://learn.microsoft.com/en-us/sql/ssms/quickstarts/ssms-connect-query-sql-server?view=sql-server-ver16).
+
 ### Summary
 
 1. **Create Database**: The script creates a new database named `TechnologyAccessories`.
 2. **Use Database**: The script switches to the `TechnologyAccessories` database for subsequent operations.
 3. **Create Tables**: The script creates four main tables: `Customer`, `Employee`, `Product`, and `Order`. It also modifies the `Product` and `Employee` tables to add additional columns as needed.
 4. **Change Connection String in Code**: Update your application’s connection string in the code to connect to the `TechnologyAccessories` database.
+5. **Obtain Connection String Path in SSMS**: Use SQL Server Management Studio to find your server's connection string. Follow the official guide from Microsoft for detailed instructions.
 
 ### Note
 
