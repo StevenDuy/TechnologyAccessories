@@ -1,4 +1,3 @@
-# TechnologyAccessories
 # Technology Accessories Store Database
 
 This README file provides instructions for creating the database for the Technology Accessories Store Sales Management System.
@@ -84,10 +83,23 @@ CREATE TABLE [Order] (
 );
 ```
 
+### Step 4: Change the Connection String in Code
+
+To connect your application to the database, update the connection string in your code. Here’s an example connection string:
+
+```csharp
+string connectionString = "Data Source=YOUR_SERVER_NAME;Initial Catalog=TechnologyAccessories;Integrated Security=True";
+```
+
+Replace `YOUR_SERVER_NAME` with the name of your SQL Server instance.
+
 ### Summary
 
 1. **Create Database**: The script creates a new database named `TechnologyAccessories`.
 2. **Use Database**: The script switches to the `TechnologyAccessories` database for subsequent operations.
 3. **Create Tables**: The script creates four main tables: `Customer`, `Employee`, `Product`, and `Order`. It also modifies the `Product` and `Employee` tables to add additional columns as needed.
+4. **Change Connection String in Code**: Update your application’s connection string in the code to connect to the `TechnologyAccessories` database.
 
-By following these steps, you will successfully create the necessary database structure for the Technology Accessories Store Sales Management System.
+### Note
+
+This project is an academic exercise and is intended for reference purposes only.
