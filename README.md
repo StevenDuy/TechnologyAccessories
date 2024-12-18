@@ -91,7 +91,3 @@ CREATE TABLE [Order] (
 3. **Create Tables**: The script creates four main tables: `Customer`, `Employee`, `Product`, and `Order`. It also modifies the `Product` and `Employee` tables to add additional columns as needed.
 
 By following these steps, you will successfully create the necessary database structure for the Technology Accessories Store Sales Management System.
-
----
-
-Feel free to add any additional instructions or notes specific to your setup or requirements! If you need further modifications, let me know.
