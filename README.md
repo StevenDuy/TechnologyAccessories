@@ -1,123 +1,180 @@
-# Technology Accessories Store Database
+# TechnologyAccessories Database Script
 
-This README file provides instructions for creating the database for the Technology Accessories Store Sales Management System.
+This script sets up and configures the TechnologyAccessories database on your SQL Server.
 
-## Prerequisites
+### Requirements
+- SQL Server
 
-- SQL Server 2012 or later
-- SQL Server Management Studio (SSMS) or any other SQL client tool
+### Steps to Create the Database
 
-## Instructions
+1. **Open SQL Server Management Studio (SSMS)**:
+   - Connect to your SQL Server instance.
 
-Follow these steps to create the `TechnologyAccessories` database and its tables.
+2. **Open a New Query Window**:
+   - Click on `New Query` in the toolbar.
 
-### Step 1: Create the Database
+3. **Copy and Paste the Script**:
+   - Copy the entire database creation script and paste it into the query window.
 
-Run the following SQL script to create the `TechnologyAccessories` database:
+4. **Execute the Script**:
+   - Click on `Execute` in the toolbar to run the script.
 
+### Here is Script
 ```sql
-CREATE DATABASE TechnologyAccessories;
-```
-
-### Step 2: Use the Created Database
-
-Select the newly created database to perform further operations:
-
-```sql
-USE TechnologyAccessories;
-```
-
-### Step 3: Create the Tables
-
-Run the following SQL script to create the necessary tables: `Customer`, `Employee`, `Product`, and `Order`.
-
-```sql
--- Create Customer table
-CREATE TABLE Customer (
-    CustomerID INT PRIMARY KEY IDENTITY(1,1),
-    Name VARCHAR(50),
-    Address VARCHAR(50),
-    Phone VARCHAR(50)
-);
-
--- Create Employee table
-CREATE TABLE Employee (
-    EmployeeID INT PRIMARY KEY IDENTITY(1,1),
-    EmployeeName VARCHAR(50),
-    EmployeeRole VARCHAR(50),
-    EmployeeAddress VARCHAR(255),
-    EmployeePhone VARCHAR(15)
-);
-
--- Create Product table
-CREATE TABLE Product (
-    ProductID INT PRIMARY KEY IDENTITY(1,1),
-    ProductName VARCHAR(100),
-    Quantity INT,
-    Price DECIMAL(10, 2)
-);
-
--- Add an image file column to the Product table
-ALTER TABLE Product
-ADD ImageFile VARBINARY(MAX);
-
--- Add username and password columns to the Employee table
-ALTER TABLE Employee
-ADD Username VARCHAR(50),
-    Password VARCHAR(50);
-
--- Create Order table
-CREATE TABLE [Order] (
-    OrderID INT PRIMARY KEY IDENTITY(1,1),
-    OrderProductID INT,
-    OrderProductName VARCHAR(100),
-    OrderCustomerID INT,
-    OrderCustomerName VARCHAR(50),
-    OrderEmployee VARCHAR(50),
-    OrderDate DATE,
-    OrderAmount INT,
-    OrderPrice DECIMAL(10, 2),
-    OrderBill DECIMAL(10, 2),
-    FOREIGN KEY (OrderProductID) REFERENCES Product(ProductID),
-    FOREIGN KEY (OrderCustomerID) REFERENCES Customer(CustomerID)
-);
-```
-
-### Step 4: Change the Connection String in Code
-
-To connect your application to the database, update the connection string in your code. Here’s an example connection string:
-
-```csharp
-string connectionString = "Data Source=YOUR_SERVER_NAME;Initial Catalog=TechnologyAccessories;Integrated Security=True";
-```
-
-Replace `YOUR_SERVER_NAME` with the name of your SQL Server instance.
-
-### How to Obtain the Connection String Path in SSMS
-
-1. Open SQL Server Management Studio (SSMS).
-2. Connect to your SQL Server instance.
-3. In the Object Explorer, right-click on your server name.
-4. Select "Properties".
-5. In the "Server Properties" window, look for the "Connection String" in the "General" section.
-
-Alternatively, you can use the "Connect" dialog in SSMS to find the connection string:
-1. In SSMS, go to "File" > "Connect Object Explorer".
-2. Fill in the "Server name" with your SQL Server instance name.
-3. Choose the authentication method and provide the necessary credentials.
-4. Click "Connect".
-5. The "Server name" field in this dialog represents the `Data Source` part of your connection string.
-
-For detailed instructions, refer to the official guide from Microsoft: [Connect and query SQL Server using SSMS - Microsoft Learn](https://learn.microsoft.com/en-us/sql/ssms/quickstarts/ssms-connect-query-sql-server?view=sql-server-ver16).
-
-### Summary
-
-1. **Create Database**: The script creates a new database named `TechnologyAccessories`.
-2. **Use Database**: The script switches to the `TechnologyAccessories` database for subsequent operations.
-3. **Create Tables**: The script creates four main tables: `Customer`, `Employee`, `Product`, and `Order`. It also modifies the `Product` and `Employee` tables to add additional columns as needed.
-4. **Change Connection String in Code**: Update your application’s connection string in the code to connect to the `TechnologyAccessories` database.
-5. **Obtain Connection String Path in SSMS**: Use SQL Server Management Studio to find your server's connection string. Follow the official guide from Microsoft for detailed instructions.
-
-### Note
-
-This project is an academic exercise and is intended for reference purposes only.
+USE [master]
+GO
+CREATE DATABASE [TechnologyAccessories]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'TechnologyAccessories', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MASTERMOS\MSSQL\DATA\TechnologyAccessories.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'TechnologyAccessories_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MASTERMOS\MSSQL\DATA\TechnologyAccessories_log.ldf' , SIZE = 73728KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [TechnologyAccessories] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+BEGIN
+EXEC [TechnologyAccessories].[dbo].[sp_fulltext_database] @action = 'enable'
+END
+GO
+ALTER DATABASE [TechnologyAccessories] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [TechnologyAccessories] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [TechnologyAccessories] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET ENABLE_BROKER 
+GO
+ALTER DATABASE [TechnologyAccessories] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [TechnologyAccessories] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET RECOVERY FULL 
+GO
+ALTER DATABASE [TechnologyAccessories] SET MULTI_USER 
+GO
+ALTER DATABASE [TechnologyAccessories] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [TechnologyAccessories] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [TechnologyAccessories] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [TechnologyAccessories] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [TechnologyAccessories] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [TechnologyAccessories] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'TechnologyAccessories', N'ON'
+GO
+ALTER DATABASE [TechnologyAccessories] SET QUERY_STORE = OFF
+GO
+USE [TechnologyAccessories]
+GO
+CREATE TABLE [dbo].[Customer](
+    [CustomerID] [int] IDENTITY(1,1) NOT NULL,
+    [Name] [varchar](50) NULL,
+    [Address] [varchar](50) NULL,
+    [Phone] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+    [CustomerID] ASC
+) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE TABLE [dbo].[Employee](
+    [EmployeeID] [int] IDENTITY(1,1) NOT NULL,
+    [EmployeeName] [varchar](50) NULL,
+    [EmployeeRole] [varchar](50) NULL,
+    [EmployeeAddress] [varchar](255) NULL,
+    [EmployeePhone] [varchar](15) NULL,
+    [Username] [varchar](50) NULL,
+    [Password] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+    [EmployeeID] ASC
+) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE TABLE [dbo].[Order](
+    [OrderID] [int] IDENTITY(1,1) NOT NULL,
+    [OrderProductID] [int] NULL,
+    [OrderProductName] [varchar](100) NULL,
+    [OrderCustomerID] [int] NULL,
+    [OrderCustomerName] [varchar](50) NULL,
+    [OrderEmployee] [varchar](50) NULL,
+    [OrderDate] [date] NULL,
+    [OrderAmount] [int] NULL,
+    [OrderPrice] [decimal](10, 2) NULL,
+    [OrderBill] [decimal](10, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+    [OrderID] ASC
+) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE TABLE [dbo].[Product](
+    [ProductID] [int] IDENTITY(1,1) NOT NULL,
+    [ProductName] [varchar](100) NULL,
+    [Quantity] [int] NULL,
+    [Price] [decimal](10, 2) NULL,
+    [ImageFile] [varbinary](max) NULL,
+    [PurchasePrice] [decimal](18, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+    [ProductID] ASC
+) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+CREATE TABLE [dbo].[TempProduct](
+    [ProductID] [int] IDENTITY(1,1) NOT NULL,
+    [ProductName] [varchar](100) NULL,
+    [Quantity] [int] NULL,
+    [Price] [decimal](10, 2) NULL,
+    [ImageFile] [varbinary](max) NULL,
+    [PurchasePrice] [decimal](18, 2) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Order]  WITH CHECK ADD FOREIGN KEY([OrderCustomerID])
+REFERENCES [dbo].[Customer] ([CustomerID])
+GO
+ALTER TABLE [dbo].[Order]  WITH CHECK ADD FOREIGN KEY([OrderProductID])
+REFERENCES [dbo].[Product] ([ProductID])
+GO
+USE [master]
+GO
+ALTER DATABASE [TechnologyAccessories] SET  READ_WRITE 
+GO
